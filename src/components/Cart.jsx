@@ -3,7 +3,7 @@
 const Cart = () => {
   return (
     <div className="cart">
-      Ovo je Cart
+      <h1>Vaša korpa</h1>
     </div>
   );
 }
