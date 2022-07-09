@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+}
+
+.product-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  .item {
+    padding: 1rem;
+
+    > img.product-img {
+      display: block;
+      height: 100px;
+      width: auto;
+    }
+  }
+}

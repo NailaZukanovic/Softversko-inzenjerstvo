@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 
-const ProductSingle = (props) => {
+const CartSingle = (props) => {
   const dispatch = useDispatch();
   const item = props.item;
 
@@ -18,9 +18,10 @@ const ProductSingle = (props) => {
       <img className="product-img" src={'/static/img/' + item.slika} />
       <div>Kategorija: {item.kategorija}</div>
       <div>{item.cena}</div>
-      <button onClick={handleAddToCart}>Dodaj u korpu</button>
+      <button>-</button>
+      <button onClick={handleAddToCart}>+</button>
     </div>
   );
 };
 
-export default ProductSingle;
+export default CartSingle;

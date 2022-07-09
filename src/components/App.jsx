@@ -1,5 +1,6 @@
 import Cart from "./Cart";
 import Products from "./Products";
+import "../scss/style.scss";
 
 const App = () => {
   return (

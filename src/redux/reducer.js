@@ -5,45 +5,49 @@ const initialState = {
       kategorija: 'Hamburger',
       naziv: 'Hamburger',
       cena: 250,
-      slika: ''
+      slika: 'slika-hamburger.jpg'
     },
     {
       kategorija: 'Hamburger',
       naziv: 'Hamburger Dupli',
       cena: 500,
-      slika: ''
+      slika: 'slika-hamburger.jpg'
     },
     {
       kategorija: 'Sokovi',
       naziv: 'Coca Cola 0.25',
       cena: 100,
-      slika: ''
+      slika: 'slika-coca-cola.png'
     },
     {
       kategorija: 'Sokovi',
       naziv: 'Coca Cola 0.33',
       cena: 140,
-      slika: ''
+      slika: 'slika-coca-cola.png'
     },
     {
       kategorija: 'Ostalo',
       naziv: 'Pomfrit srednji',
       cena: 150,
-      slika: ''
+      slika: 'slika-pomfrit.jpg'
     },
     {
       kategorija: 'Ostalo',
       naziv: 'Pomfrit veliki',
       cena: 180,
-      slika: ''
+      slika: 'slika-pomfrit.jpg'
     },
   ],
+  cart: []
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "NEKA_AKCIJA":
-      return state;
+    case "DODAJ_U_KORPU":
+      return {
+        ...state,
+        cart: [...state.cart, action.payload]
+      };
 
     default:
       return state;
