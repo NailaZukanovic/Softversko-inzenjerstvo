@@ -6,14 +6,16 @@ const Cart = () => {
   const cart = useSelector(state => state.cart);
 
   let ukupnaZaPlatiti = 0;
+  let brojStavkiUKorpi = 0;
   cart.forEach(item => {
     ukupnaZaPlatiti += item.cena;
+    brojStavkiUKorpi++;
   });
 
 
   return (
     <div className="cart">
-      <h1>Vaša korpa</h1>
+      <h1>Vaša korpa ({brojStavkiUKorpi})</h1>
       <div className="product-list">
         {
           cart.map((item, index)=>{

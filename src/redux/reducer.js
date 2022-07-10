@@ -1,3 +1,5 @@
+import { addToCartHelper, removeFromCartHelper } from "../utils/cart-utils";
+
 const initialState = {
   nesto: "bla bla",
   products: [
@@ -43,10 +45,18 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+
     case "DODAJ_U_KORPU":
       return {
         ...state,
-        cart: [...state.cart, action.payload]
+        // cart: [...state.cart, action.payload]
+        cart: addToCartHelper(state.cart, action.payload)
+      };
+
+    case "OBRISI_IZ_KORPE":
+      return {
+        ...state,
+        cart: removeFromCartHelper(state.cart, action.payload)
       };
 
     default:

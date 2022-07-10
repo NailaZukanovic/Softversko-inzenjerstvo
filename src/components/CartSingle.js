@@ -4,11 +4,11 @@ const CartSingle = (props) => {
   const dispatch = useDispatch();
   const item = props.item;
 
-  const handleAddToCart = (e)=> {
+  const handleDeleteFromCart = (e)=> {
     console.log('dodaj u korpu', item.naziv);
     dispatch({
-      type: 'DODAJ_U_KORPU',
-      payload: item
+      type: 'OBRISI_IZ_KORPE',
+      payload: item.cart_item_id
     });
   };
 
@@ -18,8 +18,7 @@ const CartSingle = (props) => {
       <img className="product-img" src={'/static/img/' + item.slika} />
       <div>Kategorija: {item.kategorija}</div>
       <div>{item.cena}</div>
-      <button>-</button>
-      <button onClick={handleAddToCart}>+</button>
+      <button onClick={handleDeleteFromCart}>&times;</button>
     </div>
   );
 };
