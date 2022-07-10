@@ -25,7 +25,9 @@ const Cart = () => {
           })
         }
       </div>
-      <div>Ukupno za platiti: {ukupnaZaPlatiti}</div>
+      <h3>Ukupno za platiti: {ukupnaZaPlatiti}</h3>
+      <p>Molimo vas da pregledate jesu li svi prilozi kako ste želeli</p>
+      <button>Naruči</button>
     </div>
   );
 }

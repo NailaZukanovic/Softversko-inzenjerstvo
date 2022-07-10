@@ -7,13 +7,15 @@ const initialState = {
       kategorija: 'Hamburger',
       naziv: 'Hamburger',
       cena: 250,
-      slika: 'slika-hamburger.jpg'
+      slika: 'slika-hamburger.jpg',
+      opcije: ['Zelena salata', 'Luk', 'Kupus', 'Kečap', 'Urnebes']
     },
     {
       kategorija: 'Hamburger',
       naziv: 'Hamburger Dupli',
       cena: 500,
-      slika: 'slika-hamburger.jpg'
+      slika: 'slika-hamburger.jpg',
+      opcije: ['Zelena salata', 'Luk', 'Kupus', 'Kečap', 'Urnebes']
     },
     {
       kategorija: 'Sokovi',
@@ -31,13 +33,15 @@ const initialState = {
       kategorija: 'Ostalo',
       naziv: 'Pomfrit srednji',
       cena: 150,
-      slika: 'slika-pomfrit.jpg'
+      slika: 'slika-pomfrit.jpg',
+      opcije: ['Kečap']
     },
     {
       kategorija: 'Ostalo',
       naziv: 'Pomfrit veliki',
       cena: 180,
-      slika: 'slika-pomfrit.jpg'
+      slika: 'slika-pomfrit.jpg',
+      opcije: ['Kečap']
     },
   ],
   cart: []

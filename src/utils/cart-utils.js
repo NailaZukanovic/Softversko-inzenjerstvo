@@ -9,7 +9,8 @@ const makeNewId = () => {
 export const addToCartHelper = (cart, item) => {
   const newItem = {
     ...item,
-    cart_item_id: makeNewId()
+    cart_item_id: makeNewId(),
+    odabrane_opcije: []
   };
   const updatedCart = [...cart, newItem];
   return updatedCart;
