@@ -1,5 +1,9 @@
 import { useDispatch } from "react-redux";
 
+
+// TODO: za sledeci put izdvoijiti priloge u posebnu komponentu CartSingleOpcije i napravtii funkcije da cuva sta je odabrano u cartu.
+
+
 const CartSingle = (props) => {
   const dispatch = useDispatch();
   const item = props.item;
@@ -13,7 +17,15 @@ const CartSingle = (props) => {
   };
 
   const _handleChangeOpcija = (cart_item_id, opcija, checked) => {
-    console.log('oncahnge se desio', cart_item_id, opcija, checked);
+    console.log('onchange se desio', cart_item_id, opcija, checked);
+    dispatch({
+      type: 'ODABRANA_OPCIJA_PROIZVODA',
+      paylaod: {
+        cart_item_id, 
+        opcija, 
+        checked
+      }
+    });
   };
 
   let jsxPrilozi = null;

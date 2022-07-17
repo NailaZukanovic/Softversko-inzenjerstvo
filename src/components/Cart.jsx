@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import CartSingle from "./CartSingle";
+import Narucivanje from "./Narucivanje";
 
 
 const Cart = () => {
@@ -27,7 +28,7 @@ const Cart = () => {
       </div>
       <h3>Ukupno za platiti: {ukupnaZaPlatiti}</h3>
       <p>Molimo vas da pregledate jesu li svi prilozi kako ste želeli</p>
-      <button>Naruči</button>
+      <Narucivanje />
     </div>
   );
 }
