@@ -20,7 +20,7 @@ const CartSingle = (props) => {
     console.log('onchange se desio', cart_item_id, opcija, checked);
     dispatch({
       type: 'ODABRANA_OPCIJA_PROIZVODA',
-      paylaod: {
+      payload: {
         cart_item_id, 
         opcija, 
         checked

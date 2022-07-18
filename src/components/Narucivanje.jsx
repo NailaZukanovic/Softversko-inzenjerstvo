@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 
 const Narucivanje = () => {
+  const odabraniRestoran = useSelector(state => state.odabraniRestoran);
 
   const preset = {
     ime_i_prezime: "",
@@ -29,6 +31,7 @@ const Narucivanje = () => {
     axios.post('http://localhost:3001/api/order/create', {
       formData: {
         ...formState,
+        restoran: odabraniRestoran,
         order_items: []
       },
     })

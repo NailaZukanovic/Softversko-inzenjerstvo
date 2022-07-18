@@ -4,7 +4,15 @@ import Narucivanje from "./Narucivanje";
 
 
 const Cart = () => {
-  const cart = useSelector(state => state.cart);
+  const odabraniRestoran = useSelector(state => state.odabraniRestoran);
+  const cartUnfiltered = useSelector(state => state.cart); // cart items za sve restorane
+
+  const cart = cartUnfiltered.filter((item)=>{
+    if (item.restoran === odabraniRestoran) {
+      return true; // zadrzavamo samo one koji su za taj restoran koji smo odabrali
+    }
+    return false; // sve ostali se ne prikazuju u cartu.
+  });
 
   let ukupnaZaPlatiti = 0;
   let brojStavkiUKorpi = 0;
