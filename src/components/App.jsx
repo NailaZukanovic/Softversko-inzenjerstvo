@@ -18,7 +18,6 @@ const App = () => {
 
   return (
     <div className="App">
-      Ovo je app
       <select
         name="odabraniRestoran"
         value={odabraniRestoran}

@@ -1,4 +1,4 @@
-import { addToCartHelper, izmenaOpcijaProizvodaHelper, removeFromCartHelper } from "../utils/cart-utils";
+import { addToCartHelper, cartPosleUspesneNarudzbeHelper, izmenaOpcijaProizvodaHelper, removeFromCartHelper } from "../utils/cart-utils";
 
 const initialState = {
   odabraniRestoran: "Hamburgerko",
@@ -87,7 +87,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cart: izmenaOpcijaProizvodaHelper(state.cart, action.payload.cart_item_id, action.payload.opcija, action.payload.checked) // TODO
-      }
+      };
+
+    case 'POSLE_USPESNE_NARUDZBE':
+      return {
+        ...state,
+        cart: cartPosleUspesneNarudzbeHelper(action.payload, state.cart)
+      };
 
     default:
       return state;

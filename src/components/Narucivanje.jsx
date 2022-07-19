@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { pripremiCartItemsZaNaruudzbu } from "../utils/cart-utils";
 
 
 const Narucivanje = () => {
+  const dispatch = useDispatch();
   const odabraniRestoran = useSelector(state => state.odabraniRestoran);
+  const cart = useSelector(state => state.cart);
 
   const preset = {
     ime_i_prezime: "",
@@ -25,19 +28,38 @@ const Narucivanje = () => {
     });
   };
 
+  /*
+  PROBLEMATIKA NARUCIVANJA
+  - order_items treba isfiltrirati da idu sam ooni items koji su od odabranog restorana
+  - zatim moramo prepakovati iz order_items_obj u obican array
+  - nakon uspesne narzdzbe moramo obristi te stavke it carta koje su od tog restorana za koji je naruceno
+  */
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('submit data', formState);
+    const formData = {
+      restoran: odabraniRestoran,
+      ...formState,
+      order_items: pripremiCartItemsZaNaruudzbu(odabraniRestoran, cart)
+    };
+    console.log('submit data', formData);
     axios.post('http://localhost:3001/api/order/create', {
-      formData: {
-        ...formState,
-        restoran: odabraniRestoran,
-        order_items: []
-      },
+      formData
     })
       .then(res => {
         console.log('stigao repsonse sa backenda', res);
+        if (true) {
+          // ako je backend uspesno primio narudzbu
+          alert('Narudzba je uspesno primljena :)');
+          dispatch({
+            type: 'POSLE_USPESNE_NARUDZBE',
+            payload: odabraniRestoran
+          });
+        }
       })
+      .catch((err)=>{
+        console.log('cathct error in http://localhost:3001/api/order/create', err);
+      })
+
   };
 
   /*
@@ -63,7 +85,17 @@ const Narucivanje = () => {
       <h3>Narucivanje</h3>
 
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="field">
+          <label>Restoran</label>
+          <input
+            readOnly
+            type="text"
+            name="restoran"
+            value={odabraniRestoran}
+          />
+        </div>
+        <div className="field">
+          <label>Ime i prezime</label>
           <input
             type="text"
             name="ime_i_prezime"
@@ -71,7 +103,8 @@ const Narucivanje = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="field">
+          <label>Adresa</label>
           <input
             type="text"
             name="adresa"
@@ -79,7 +112,8 @@ const Narucivanje = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="field">
+          <label>Telefon</label>
           <input
             type="text"
             name="telefon"
@@ -87,12 +121,14 @@ const Narucivanje = () => {
             onChange={handleChange}
           />
         </div>
-        <div>
-          <input
+        <div className="field">
+          <label>Napomena</label>
+          <textarea
             type="text"
             name="napomena"
             value={formState.napomena}
             onChange={handleChange}
+            cols="4"
           />
         </div>
 

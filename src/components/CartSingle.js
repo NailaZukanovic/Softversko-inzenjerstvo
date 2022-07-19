@@ -21,8 +21,8 @@ const CartSingle = (props) => {
     dispatch({
       type: 'ODABRANA_OPCIJA_PROIZVODA',
       payload: {
-        cart_item_id, 
-        opcija, 
+        cart_item_id,
+        opcija,
         checked
       }
     });
@@ -37,9 +37,13 @@ const CartSingle = (props) => {
           {
             item.opcije.map((opcija) => {
               return (
-                <div key={opcija}>
+                <div key={'cart' + item.cart_item_id + opcija}>
                   <label>
-                    <input type="checkbox" onChange={(e) => { _handleChangeOpcija(item.cart_item_id, opcija, e.target.checked) }} />{opcija}
+                    <input 
+                    type="checkbox" 
+                    onChange={(e) => { _handleChangeOpcija(item.cart_item_id, opcija, e.target.checked) }} 
+                    checked={item.odabrane_opcije_obj[opcija] === true}
+                    />{opcija}
                   </label>
                 </div>
               );
