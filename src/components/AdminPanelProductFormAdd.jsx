@@ -179,7 +179,7 @@ const AdminPanelProductFormAdd = (props) => {
             <option value="Sendviči">Sendviči</option>
             <option value="Peciva">Peciva</option>
             <option value="Sokovi">Sokovi</option>
-            <option value="Završeno">Ostalo</option>
+            <option value="Ostalo">Ostalo</option>
           </select>
         </div>
         <div className="field">
