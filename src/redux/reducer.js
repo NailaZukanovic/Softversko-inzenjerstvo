@@ -1,68 +1,26 @@
-import { addToCartHelper, cartPosleUspesneNarudzbeHelper, izmenaOpcijaProizvodaHelper, removeFromCartHelper } from "../utils/cart-utils";
+import { addToCartHelper, cartMinusHelper, cartPlusHelper, cartPosleUspesneNarudzbeHelper, editCartHelper, izmenaOpcijaProizvodaHelper, removeFromCartHelper } from "../utils/cart-utils";
+// import { _products_example } from "../utils/proizvodi-example-data";
+
 
 const initialState = {
-  odabraniRestoran: "Hamburgerko",
-  products: [
-    {
-      restoran: 'Hamburgerko',
-      kategorija: 'Hamburger',
-      naziv: 'Hamburger',
-      cena: 250,
-      slika: 'slika-hamburger.jpg',
-      opcije: ['Zelena salata', 'Luk', 'Kupus', 'Kečap', 'Urnebes']
-    },
-    {
-      restoran: 'Hamburgerko',
-      kategorija: 'Hamburger',
-      naziv: 'Hamburger Dupli',
-      cena: 500,
-      slika: 'slika-hamburger.jpg',
-      opcije: ['Zelena salata', 'Luk', 'Kupus', 'Kečap', 'Urnebes']
-    },
-    {
-      restoran: 'Hamburgerko',
-      kategorija: 'Sokovi',
-      naziv: 'Coca Cola 0.25',
-      cena: 100,
-      slika: 'slika-coca-cola.png'
-    },
-    {
-      restoran: 'Hamburgerko',
-      kategorija: 'Sokovi',
-      naziv: 'Coca Cola 0.33',
-      cena: 140,
-      slika: 'slika-coca-cola.png'
-    },
-    {
-      restoran: 'Hamburgerko',
-      kategorija: 'Ostalo',
-      naziv: 'Pomfrit srednji',
-      cena: 150,
-      slika: 'slika-pomfrit.jpg',
-      opcije: ['Kečap']
-    },
-    {
-      restoran: 'Hamburgerko',
-      kategorija: 'Ostalo',
-      naziv: 'Pomfrit veliki',
-      cena: 180,
-      slika: 'slika-pomfrit.jpg',
-      opcije: ['Kečap']
-    },
-    {
-      restoran: 'Walter',
-      kategorija: 'Roštilj',
-      naziv: 'Ćevapi 10 komada',
-      cena: 610,
-      slika: 'slika-hamburger.jpg',
-      opcije: ['Kečap', 'Luk', 'Majonez']
-    },
-  ],
+  adminPanelOpened: false,
+  adminRoute: null,
+  adminLoggedRestoran: null,
+  modalContent: null,
+  odabraniRestoran: null,
+  products: [],
   cart: []
 };
 
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case "PROIZVODI_FETCEHD":
+      return {
+        ...state,
+        products: action.payload
+      };
 
     case "ODABRAN_RESTORAN":
       return {
@@ -70,17 +28,48 @@ const reducer = (state = initialState, action) => {
         odabraniRestoran: action.payload
       };
 
+    case "DODAJ_U_KORPU_MODAL":
+      return {
+        ...state,
+        modalContent: action.payload.modalContent
+      };
+
     case "DODAJ_U_KORPU":
       return {
         ...state,
-        // cart: [...state.cart, action.payload]
-        cart: addToCartHelper(state.cart, action.payload)
+        cart: addToCartHelper(state.cart, action.payload),
+        modalContent: null
+      };
+
+    case "IZMENI_IZ_KORPE_MODAL":
+      return {
+        ...state,
+        modalContent: action.payload.modalContent
+      };
+
+    case "IZMENI_IZ_KORPE":
+      return {
+        ...state,
+        cart: editCartHelper(state.cart, action.payload),
+        modalContent: null
       };
 
     case "OBRISI_IZ_KORPE":
       return {
         ...state,
         cart: removeFromCartHelper(state.cart, action.payload)
+      };
+
+    case "KORPA_PLUS":
+      return {
+        ...state,
+        cart: cartPlusHelper(state.cart, action.payload)
+      };
+
+    case "KORPA_MINUS":
+      return {
+        ...state,
+        cart: cartMinusHelper(state.cart, action.payload)
       };
 
     case 'ODABRANA_OPCIJA_PROIZVODA':
@@ -93,6 +82,58 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cart: cartPosleUspesneNarudzbeHelper(action.payload, state.cart)
+      };
+
+    case 'MODAL_SHOW':
+      return {
+        ...state,
+        modalContent: action.payload
+      };
+
+    case 'MODAL_CLOSE':
+      return {
+        ...state,
+        modalContent: null
+      };
+
+    case 'ADMIN_PANEL_OPEN':
+      return {
+        ...state,
+        adminPanelOpened: true
+      };
+
+    /*
+  case 'ADMIN_PANEL_CLOSE':
+    return {
+      ...state,
+      adminPanelOpened: false
+    };
+    */
+
+    case 'ADMIN_LOGIN':
+      return {
+        ...state,
+        adminLoggedRestoran: action.payload
+      };
+
+    case 'ADMIN_LOGOUT':
+      return {
+        ...state,
+        adminPanelOpened: false,
+        adminLoggedRestoran: null,
+        adminRoute: null
+      };
+
+    case 'ADMIN_ROUTE_SET':
+      return {
+        ...state,
+        adminRoute: action.payload
+      };
+
+    case 'ADMIN_DODAJ_PROIZVOD_MODAL':
+      return {
+        ...state,
+        modalContent: action.payload.modalContent
       };
 
     default:

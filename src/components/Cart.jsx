@@ -17,14 +17,14 @@ const Cart = () => {
   let ukupnaZaPlatiti = 0;
   let brojStavkiUKorpi = 0;
   cart.forEach(item => {
-    ukupnaZaPlatiti += item.cena;
+    ukupnaZaPlatiti += item.cena * item.kolicina;
     brojStavkiUKorpi++;
   });
 
 
   return (
     <div className="cart">
-      <h1>Vaša korpa ({brojStavkiUKorpi})</h1>
+      <h2>Vaša korpa ({brojStavkiUKorpi})</h2>
       <div className="product-list">
         {
           cart.map((item, index)=>{
@@ -34,9 +34,11 @@ const Cart = () => {
           })
         }
       </div>
+      {/*
       <h3>Ukupno za platiti: {ukupnaZaPlatiti}</h3>
       <p>Molimo vas da pregledate jesu li svi prilozi kako ste želeli</p>
-      <Narucivanje />
+      */}
+      <Narucivanje brojStavkiUKorpi={brojStavkiUKorpi} ukupnaZaPlatiti={ukupnaZaPlatiti} />
     </div>
   );
 }

@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { pripremiCartItemsZaNaruudzbu } from "../utils/cart-utils";
 
 
-const Narucivanje = () => {
+const Narucivanje = (props) => {
   const dispatch = useDispatch();
+  const brojStavkiUKorpi = props.brojStavkiUKorpi;
+  const ukupnaZaPlatiti = props.ukupnaZaPlatiti;
   const odabraniRestoran = useSelector(state => state.odabraniRestoran);
   const cart = useSelector(state => state.cart);
 
@@ -28,6 +30,22 @@ const Narucivanje = () => {
     });
   };
 
+  const validator = (formData) => {
+    let test = true;
+
+    if (formData.ime_i_prezime === '') {
+      test = false;
+    }
+    if (formData.adresa === '') {
+      test = false;
+    }
+    if (formData.telefon === '') {
+      test = false;
+    }
+
+    return test;
+  };
+
   /*
   PROBLEMATIKA NARUCIVANJA
   - order_items treba isfiltrirati da idu sam ooni items koji su od odabranog restorana
@@ -42,24 +60,30 @@ const Narucivanje = () => {
       order_items: pripremiCartItemsZaNaruudzbu(odabraniRestoran, cart)
     };
     console.log('submit data', formData);
-    axios.post('http://localhost:3001/api/order/create', {
-      formData
-    })
-      .then(res => {
-        console.log('stigao repsonse sa backenda', res);
-        if (true) {
-          // ako je backend uspesno primio narudzbu
-          alert('Narudzba je uspesno primljena :)');
-          dispatch({
-            type: 'POSLE_USPESNE_NARUDZBE',
-            payload: odabraniRestoran
-          });
-        }
-      })
-      .catch((err)=>{
-        console.log('cathct error in http://localhost:3001/api/order/create', err);
-      })
+    if (validator(formState)) {
 
+      axios.post('http://localhost:3001/api/order/create', {
+        formData
+      })
+        .then(res => {
+          console.log('stigao repsonse sa backenda', res);
+          if (true) {
+            // ako je backend uspesno primio narudzbu
+            alert('Narudzba je uspesno primljena :)');
+            // posle uspesne narudzbe praznimo cart jer su proizvodi iz carta vec naruceni.
+            dispatch({
+              type: 'POSLE_USPESNE_NARUDZBE',
+              payload: odabraniRestoran
+            });
+          }
+        })
+        .catch((err) => {
+          console.log('cathct error in http://localhost:3001/api/order/create', err);
+        })
+
+    } else {
+      alert('Sva polja izuzev napomene su obavezna.');
+    }
   };
 
   /*
@@ -82,7 +106,7 @@ const Narucivanje = () => {
 
   return (
     <div className="">
-      <h3>Narucivanje</h3>
+      <h3>Adresa za dostavu</h3>
 
       <form onSubmit={handleSubmit}>
         <div className="field">
@@ -132,7 +156,14 @@ const Narucivanje = () => {
           />
         </div>
 
-        <button type="submit">Naruči</button>
+        {
+          (brojStavkiUKorpi > 0) ? (
+            <button className="btn-round" type="submit"><i className="fa fa-shopping-cart" aria-hidden="true"></i> Naruči za {ukupnaZaPlatiti} RSD</button>
+          ) : (
+            <button disabled className="btn-round disabled" type="button"><i className="fa fa-shopping-cart" aria-hidden="true"></i> Naruči za {ukupnaZaPlatiti} RSD</button>
+          )
+        }
+
       </form>
 
 

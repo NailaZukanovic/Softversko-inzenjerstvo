@@ -9,10 +9,21 @@ const makeNewId = () => {
 export const addToCartHelper = (cart, item) => {
   const newItem = {
     ...item,
-    cart_item_id: makeNewId(),
-    odabrane_opcije_obj: {}
+    cart_item_id: makeNewId()
   };
   const updatedCart = [...cart, newItem];
+  return updatedCart;
+};
+
+export const editCartHelper = (cart, editedItem) => {
+  const updatedCart = cart.map((item) => {
+    if (item.cart_item_id === editedItem.cart_item_id) {
+      return {
+        ...editedItem
+      };
+    }
+    return item; // svi ostali ostaju neizmenjeni
+  });
   return updatedCart;
 };
 
@@ -22,6 +33,39 @@ export const removeFromCartHelper = (cart, id) => {
       return false; // brise taj koji ima id za brisanje
     }
     return true; // svi ostali ostaju u cartu
+  });
+  return updatedCart;
+};
+
+export const cartPlusHelper = (cart, id) => {
+  const updatedCart = cart.map((item) => {
+    if (item.cart_item_id === id) {
+      return {
+        ...item,
+        kolicina: item.kolicina + 1
+      };
+    }
+    return item; // svi ostali ostaju neizmenjeni
+  });
+  return updatedCart;
+};
+
+export const cartMinusHelper = (cart, id) => {
+  const updatedCart = [];
+  cart.forEach((item) => {
+    if (item.cart_item_id === id) {
+      if (item.kolicina > 1) {
+        const updatedItem = {
+          ...item,
+          kolicina: item.kolicina - 1
+        };
+        updatedCart.push(updatedItem);
+      } else {
+        // ako je kolicina 1 na minus se brise iz cart-a
+      }
+    } else {
+      updatedCart.push(item); // svi ostali ostaju neizmenjeni
+    }
   });
   return updatedCart;
 };
