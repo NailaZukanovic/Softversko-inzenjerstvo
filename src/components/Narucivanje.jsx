@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { makeUrlPrefix } from "../utils/api-utils";
 import { pripremiCartItemsZaNaruudzbu } from "../utils/cart-utils";
 
 
@@ -61,8 +62,8 @@ const Narucivanje = (props) => {
     };
     console.log('submit data', formData);
     if (validator(formState)) {
-
-      axios.post('http://localhost:3001/api/order/create', {
+      const api = makeUrlPrefix() + '/api/order/create'
+      axios.post(api, {
         formData
       })
         .then(res => {
