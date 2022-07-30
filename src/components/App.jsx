@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../scss/style.scss";
+import { makeUrlPrefix } from "../utils/api-utils";
 import AdminPanel from "./AdminPanel";
 import KupacPanel from "./KupacPanel";
 import Modal from "./Modal";
@@ -21,7 +22,8 @@ const App = () => {
   useEffect(()=>{
     // INIT
     // inicijalno preuzimanje menija/cenovnika
-    const api = 'http://localhost:3001/api/product/get/all';
+    // const api = 'http://localhost:3001/api/product/get/all';
+    const api = makeUrlPrefix() + '/api/product/get/all';
     axios.get(api)
       .then(res => {
         console.log('api product get all', res);

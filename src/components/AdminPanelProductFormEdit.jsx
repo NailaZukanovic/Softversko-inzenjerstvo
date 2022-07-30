@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { makeUrlPrefix } from "../utils/api-utils";
 
 
 const AdminPanelProductFormEdit = (props) => {
@@ -75,7 +76,8 @@ const AdminPanelProductFormEdit = (props) => {
     console.log('submit data', formData);
     if (validator(formState)) {
 
-      const api = 'http://localhost:3001/api/product/update/' + item._id;
+      // const api = 'http://localhost:3001/api/product/update/' + item._id;
+      const api = makeUrlPrefix() + '/api/product/update/' + item._id;
       axios.patch(api, {
         formData
       })

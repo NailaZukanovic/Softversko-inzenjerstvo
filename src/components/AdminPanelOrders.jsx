@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import AdminPanelOrderSingle from "./AdminPanelOrderSingle";
+import { makeUrlPrefix } from "../utils/api-utils";
 
 
 const AdminPanelOrders = () => {
@@ -17,7 +18,8 @@ const AdminPanelOrders = () => {
   });
 
   const refresh = () => {
-    const api = 'http://localhost:3001/api/order/get/all';
+    // const api = 'http://localhost:3001/api/order/get/all';
+    const api = makeUrlPrefix() + '/api/order/get/all';
     axios.get(api)
       .then(res => {
         console.log('api orders get all', res);

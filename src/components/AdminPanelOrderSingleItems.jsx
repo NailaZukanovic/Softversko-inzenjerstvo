@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { makeUrlPrefix } from "../utils/api-utils";
 
 
 const AdminPanelOrderSingleItems = (props) => {
@@ -7,7 +8,8 @@ const AdminPanelOrderSingleItems = (props) => {
   const [ordersItems, setOrderItems] = useState([]);
 
   const refresh = () => {
-    const api = 'http://localhost:3001/api/orderitems/get/' + order_id;
+    // const api = 'http://localhost:3001/api/orderitems/get/' + order_id;
+    const api = makeUrlPrefix() + '/api/orderitems/get/' + order_id;
     axios.get(api)
       .then(res => {
         console.log('api order items get by order_id', order_id, res);

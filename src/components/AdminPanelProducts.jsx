@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import AdminPanelProductSingle from "./AdminPanelProductSingle";
 import AdminPanelProductFormAdd from "./AdminPanelProductFormAdd";
+import { makeUrlPrefix } from "../utils/api-utils";
 
 
 const AdminPanelProducts = () => {
@@ -19,7 +20,8 @@ const AdminPanelProducts = () => {
   });
 
   const refresh = () => {
-    const api = 'http://localhost:3001/api/product/get/all';
+    // const api = 'http://localhost:3001/api/product/get/all';
+    const api = makeUrlPrefix() + '/api/product/get/all';
     axios.get(api)
       .then(res => {
         console.log('api product get all', res);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AdminPanelOrderSingleItems from "./AdminPanelOrderSingleItems";
+import { makeUrlPrefix } from "../utils/api-utils";
 
 
 const AdminPanelOrderSingle = (props) => {
@@ -23,7 +24,8 @@ const AdminPanelOrderSingle = (props) => {
   }, []);
 
   const _handleDelete = (id) => {
-    const api = 'http://localhost:3001/api/order/delete/' + id;
+    // const api = 'http://localhost:3001/api/order/delete/' + id;
+    const api = makeUrlPrefix() + '/api/order/delete/' + id;
     axios.delete(api)
       .then(res => {
         console.log('api orders delete', res);
@@ -34,7 +36,8 @@ const AdminPanelOrderSingle = (props) => {
   };
 
   const _handleIzmeniStatus = (id, status) => {
-    const api = 'http://localhost:3001/api/order/status/update/' + id;
+    // const api = 'http://localhost:3001/api/order/status/update/' + id;
+    const api = makeUrlPrefix() + '/api/order/status/update/' + id;
     axios.patch(api, {
       formData: {
         status: status

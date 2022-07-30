@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import AdminPanelProductFormEdit from "./AdminPanelProductFormEdit";
+import { makeUrlPrefix } from "../utils/api-utils";
 
 
 const AdminPanelProductSingle = (props) => {
@@ -15,7 +16,8 @@ const AdminPanelProductSingle = (props) => {
 
   const _handleDelete = (id) => {
     if (window.confirm('Jeste li sigurni da želite da obrišete proizvod?')) {
-      const api = 'http://localhost:3001/api/product/delete/' + id;
+      // const api = 'http://localhost:3001/api/product/delete/' + id;
+      const api = makeUrlPrefix() + '/api/product/delete/' + id;
       axios.delete(api)
         .then(res => {
           console.log('api product delete', res);

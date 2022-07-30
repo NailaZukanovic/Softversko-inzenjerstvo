@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { makeUrlPrefix } from "../utils/api-utils";
 
 
 const AdminPanelProductFormAdd = (props) => {
@@ -77,7 +78,8 @@ const AdminPanelProductFormAdd = (props) => {
     console.log('submit data', formData);
     if (validator(formState)) {
 
-      const api = 'http://localhost:3001/api/product/create';
+      // const api = 'http://localhost:3001/api/product/create';
+      const api = makeUrlPrefix() + '/api/product/create';
       axios.post(api, {
         formData
       })
