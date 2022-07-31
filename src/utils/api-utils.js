@@ -4,7 +4,7 @@ export const makeUrlPrefix = () => {
     // CASE localhost react development server
     // port 3000 is local react development server
     // port 3001 is default express server port
-    url_prefix = 'http://:3001';
+    url_prefix = 'http://localhost:3001';
     // example 'http://localhost:3001'
   } else {
     // CASE react app build is hosted inside public folder on real backend
