@@ -34,16 +34,15 @@ const AdminPanelOrders = () => {
   }, []);
 
   return (
-    <div className="admin-panel">
+    <div className="admin-panel-orders">
       <h2>Administracija narudžbi za restoran {adminLoggedRestoran}</h2>
 
       <button onClick={(e) => { refresh() }}>Osveži</button>
 
-      <table>
+      <table className="admin-panel-orders-table">
         <thead>
           <tr>
             <th>Narudžba</th>
-            <th>Stavke narudžbe</th>
           </tr>
         </thead>
         <tbody>

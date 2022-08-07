@@ -33,7 +33,7 @@ const AdminPanelSections = () => {
         <br />
         <br />
 
-        <div className="admin-panel">
+        <div className="admin-panel-sections">
 
           {
             (adminRoute === 'ADMIN_ORDERS') && (

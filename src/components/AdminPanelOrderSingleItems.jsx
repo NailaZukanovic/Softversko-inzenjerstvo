@@ -26,37 +26,41 @@ const AdminPanelOrderSingleItems = (props) => {
   return (
     <div className="order-items">
 
-      <table>
-        <thead>
-          <tr>
-            {/*<th>_id</th>*/}
-            <th>order_id</th>
-            <th>Kategorija</th>
-            <th>Naziv</th>
-            <th>Količina</th>
-            <th>Prilozi</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            ordersItems.map((item) => {
-              const jsxPrilozi = item.odabrane_opcije.join(', ');
-              return (
-                <tr key={item._id}>
-                  {/*<td>{item._id}</td>*/}
-                  <td>{item.order_id}</td>
-                  <td>{item.kategorija}</td>
-                  <td>{item.naziv}</td>
-                  <td>{item.kolicina}</td>
-                  <td>{jsxPrilozi}</td>
-                </tr>
-              );
-            })
-          }
-        </tbody>
-      </table>
+      {
+        ordersItems.map((item, index) => {
+          const jsxPrilozi = item.odabrane_opcije.join(', ');
+          return (
+            <div>stavka #{index + 1}
+              <table className="order-items-table">
+                <tbody>
+                  <tr>
+                    <td>order_id</td>
+                    <td>{item.order_id}</td>
+                  </tr>
+                  <tr>
+                    <td>Kategorija</td>
+                    <td>{item.kategorija}</td>
+                  </tr>
+                  <tr>
+                    <td>Naziv</td>
+                    <td><b>{item.naziv}</b></td>
+                  </tr>
+                  <tr>
+                    <td>Količina</td>
+                    <td><b>{item.kolicina}</b></td>
+                  </tr>
+                  <tr>
+                    <td>Prilozi</td>
+                    <td><b>{jsxPrilozi}</b></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          );
+        })
+      }
 
-    </div>
+    </div >
   );
 };
 

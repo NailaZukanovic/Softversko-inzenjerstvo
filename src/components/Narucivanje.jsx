@@ -106,7 +106,7 @@ const Narucivanje = (props) => {
   */
 
   return (
-    <div className="">
+    <div className="narucivanje-forma">
       <h3>Adresa za dostavu</h3>
 
       <form onSubmit={handleSubmit}>

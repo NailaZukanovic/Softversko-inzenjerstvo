@@ -19,7 +19,7 @@ const App = () => {
   const dispatch = useDispatch();
   const adminPanelOpened = useSelector(state => state.adminPanelOpened);
 
-  useEffect(()=>{
+  useEffect(() => {
     // INIT
     // inicijalno preuzimanje menija/cenovnika
     // const api = 'http://localhost:3001/api/product/get/all';
@@ -40,20 +40,22 @@ const App = () => {
 
   return (
     <>
-      <div className="wrapper">
+      <div className={adminPanelOpened ? "wrapper wrapper-admin" : "wrapper"}>
         <header>
           <h1>BRZA HRANA</h1>
           <div>Naručite dostavu hrane iz raznih restorana</div>
         </header>
-        <div className="main">
-          {
-            adminPanelOpened ? (
+        {
+          adminPanelOpened ? (
+            <div className="main main-admin">
               <AdminPanel />
-            ) : (
+            </div>
+          ) : (
+            <div className="main">
               <KupacPanel />
-            )
-          }
-        </div>
+            </div>
+          )
+        }
         <footer>
           <div onClick={(e) => {
             dispatch({ type: 'ADMIN_PANEL_OPEN' })

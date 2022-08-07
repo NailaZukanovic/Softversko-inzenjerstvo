@@ -11,7 +11,7 @@ html {
 body {
   margin: 0px;
   padding: 0px;
-  background-color: burlywood;
+  background-color: white;
 }
 
 .flex-1 {
@@ -44,10 +44,21 @@ button {
   align-items: stretch;
 
   min-height: 100vh;
+  background-color: burlywood;
+
+  &.wrapper-admin {
+    background-color: white;
+  }
 
   header {
     padding: 40px;
     background-color: rgb(255, 255, 255, 0.5);
+  }
+
+  @media screen and (max-width: 640px) {
+    header {
+      padding: 20px;
+    }
   }
 
   .main {
@@ -56,10 +67,27 @@ button {
     padding-top: 20px;
   }
 
+  @media screen and (max-width: 640px) {
+    .main {
+      padding: 10px;
+
+      &.main-admin {
+        padding: 10px 0px;
+      }
+    }
+  }
+
   footer {
     padding: 40px;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
+  }
+
+  @media screen and (max-width: 640px) {
+    footer {
+      padding: 20px;
+      padding-bottom: 40px;
+    }
   }
 }
 
@@ -75,6 +103,8 @@ img.product-img {
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: stretch;
+
+  width: 100%;
 }
 
 .product-item,
@@ -91,6 +121,7 @@ img.product-img {
 
 .product-item {
   padding: 15px;
+  min-width: 200px;
 }
 
 .cart-item {
@@ -129,18 +160,46 @@ img.product-img {
   >* {
     padding: 20px;
     margin-right: 20px;
-    min-width: 400px;
+    min-width: 280px;
     background-color: white;
     border-radius: 6px;
 
-    width: 100%;
+    /* width: 100%; */
+    flex: 1;
 
-    &.cart {
-      width: 360px;
-      margin-right: 0px;
+  }
+
+  >.cart {
+    max-width: 320px;
+    margin-right: 0px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .narucivanje-forma {
+      width: 100%;
     }
   }
 }
+
+@media screen and (max-width: 640px) {
+  .main-columns {
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    >.products {
+      margin-right: 0px;
+    }
+
+    >.cart {
+      margin-top: 15px;
+    }
+  }
+}
+
 
 .bar {
   display: flex;
@@ -148,8 +207,6 @@ img.product-img {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-
-  width: 100%;
 
   >.naziv {
     padding-right: 15px;
@@ -173,6 +230,24 @@ table {
   }
 }
 
+table.order-items-table {
+  background-color: rgb(220, 220, 220);
+}
+
+table.admin-panel-products-table>tbody>tr>td,
+table.admin-panel-orders-table>tbody>tr>td {
+  padding-bottom: 10px;
+  border-bottom: 3px solid black;
+}
+
+@media screen and (max-width: 640px) {
+  .admin-panel {
+    table {
+      font-size: 12px;
+    }
+  }
+}
+
 
 form {
   .field {
@@ -185,12 +260,14 @@ form {
       color: #356454;
     }
 
-    input, select {
+    input,
+    select {
       width: 100%;
       padding: 7px 10px;
       border: 1px solid #356454;
       border-radius: 6px;
     }
+
     input[type="number"] {
       text-align: right;
     }
@@ -234,14 +311,17 @@ form {
   align-items: center;
 
   .modal-panel {
-    position: relative;
+    position: absolute;
+    bottom: -600px;
     box-sizing: border-box;
-    width: 640px;
+    width: 560px;
     height: 0px;
     background-color: white;
     border-radius: 6px;
     box-shadow: 0 2px 6px 2px rgb(0, 0, 0, 0.5);
     overflow: hidden;
+    padding: 40px;
+    padding-bottom: 60px;
 
     .close {
       position: absolute;
@@ -258,6 +338,19 @@ form {
       cursor: pointer;
     }
   }
+
+  @media screen and (max-width: 640px) {
+    .modal-panel {
+      width: 90%;
+      margin-right: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .modal-overlay {
+    justify-content: flex-end;
+  }
 }
 
 .modal-opened {
@@ -265,12 +358,12 @@ form {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
-    transition: background-color 0.5 ease-in;
+    transition: height 0s linear, background-color 0.2s ease;
 
     .modal-panel {
+      bottom: -10px;
       height: unset;
       min-height: 480px;
-      padding: 40px;
     }
   }
 }
@@ -279,10 +372,21 @@ form {
   .admin-panel-login-form {
     max-width: 360px;
   }
+
   .admin-panel {
     padding: 20px;
     background-color: white;
     border-radius: 6px;
+  }
+
+  @media screen and (max-width: 640px) {
+    .admin-panel {
+      padding: 10px;
+
+      h2 {
+        font-size: 16px;
+      }
+    }
   }
 
 }

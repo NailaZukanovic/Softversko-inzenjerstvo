@@ -48,30 +48,31 @@ const AdminPanelProducts = () => {
   };
 
   return (
-    <div className="admin-panel">
+    <div className="admin-panel-products">
       <h2>Administracija menija/proizvoda/cenovnika za restoran {adminLoggedRestoran}</h2>
 
       <button onClick={(e) => { refresh() }}>Osveži</button>
+      &nbsp;
       <button onClick={(e) => { handleAddProduct() }}>Dodaj novi proizvod</button>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Proizvod</th>
-            <th>Slika</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            productsZaRestoran.map((item) => {
-              return (
-                <AdminPanelProductSingle key={item._id} item={item} refresh={refresh} />
-              );
-            })
-          }
-        </tbody>
-      </table>
+      <div>
+        <table className="admin-panel-products-table">
+          <thead>
+            <tr>
+              <th>Proizvod</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              productsZaRestoran.map((item) => {
+                return (
+                  <AdminPanelProductSingle key={item._id} item={item} refresh={refresh} />
+                );
+              })
+            }
+          </tbody>
+        </table>
+      </div>
 
     </div>
   );

@@ -9,9 +9,9 @@ const AdminPanel = () => {
 
   return (
     <div className="admin-panel-wrapper">
-      <h1>Admin panel</h1>
-
       <div className="admin-panel">
+        <h1>Admin panel</h1>
+
         {
           adminLoggedRestoran ? (
             <AdminPanelSections />
@@ -19,8 +19,8 @@ const AdminPanel = () => {
             <AdminPanelLoginForm />
           )
         }
-      </div>
 
+      </div>
     </div >
   );
 };

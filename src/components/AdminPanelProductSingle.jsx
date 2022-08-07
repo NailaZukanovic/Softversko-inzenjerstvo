@@ -82,17 +82,21 @@ const AdminPanelProductSingle = (props) => {
                 <td>Vreme izmene</td>
                 <td>{item.date_modified}</td>
               </tr>
+              <tr>
+                <td>Slika</td>
+                <td><img className="product-img" src={item.slika} /></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>
+                  <button onClick={(e) => { _handleIzmeni(item) }}>Izmeni proizvod</button>
+                  &nbsp;
+                  <button onClick={(e) => { _handleDelete(item._id) }}>Obriši proizvod</button>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
-      </td>
-      <td>
-        <img className="product-img" src={item.slika} />
-      </td>
-      <td>
-        <button onClick={(e) => { _handleIzmeni(item) }}>Izmeni proizvod</button>
-        &nbsp;
-        <button onClick={(e) => { _handleDelete(item._id) }}>Obriši proizvod</button>
       </td>
     </tr>
   );

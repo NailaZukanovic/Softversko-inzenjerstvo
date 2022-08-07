@@ -105,10 +105,10 @@ const AdminPanelOrderSingle = (props) => {
             <button onClick={(e) => { _handleIzmeniStatus(item._id, status) }}>Izmeni status</button>
             <button onClick={(e) => { _handleDelete(item._id) }}>Obriši narudžbu</button>
           </div>
+          <br />
+          <b>Stavke narudžbe</b>
+          <AdminPanelOrderSingleItems order_id={item._id} />
         </div>
-      </td>
-      <td>
-        <AdminPanelOrderSingleItems order_id={item._id} />
       </td>
     </tr>
   );
